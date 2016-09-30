@@ -6,3 +6,10 @@
   (let [tuple (fn [x] [x (g (h x))])
         combine (fn [acc t] (assoc acc (t 0) (t 1)))]
     (reduce combine {} (map tuple (keys g)))))
+
+(defn inverse
+  "determine the inverse of a permutation"
+  [g]
+  (let [tuple (fn [x] [(g x) x])
+        combine (fn [acc t] (assoc acc (t 0) (t 1)))]
+    (reduce combine {} (map tuple (keys g)))))
