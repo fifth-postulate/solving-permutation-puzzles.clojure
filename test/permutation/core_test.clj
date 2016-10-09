@@ -16,3 +16,14 @@
   (testing "should determine identity"
     (is (= (identity-for {0 0, 1 2, 2 1}) {0 0, 1 1, 2 2}))
     (is (= (identity-for {0 1, 1 0}) {0 0, 1 1}))))
+
+(deftest cycles-test
+  (testing "should correctly return all cycles"
+    (is (= (cycles {0 0}) [[0]]))
+    (is (= (cycles {0 0, 1 1}) [[0] [1]]))
+    (is (= (cycles {0 0, 1 1, 2 2}) [[0] [1] [2]]))
+    (is (= (cycles {0 1, 1 0}) [[0 1]]))
+    (is (= (cycles {0 1, 1 0, 2 2}) [[0 1] [2]]))
+    (is (= (cycles {0 1, 1 2, 2 0}) [[0 1 2]]))
+    (is (= (cycles {0 1, 1 0, 2 3, 3 2}) [[0 1] [2 3]]))))
+
