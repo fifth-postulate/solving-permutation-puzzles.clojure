@@ -33,7 +33,7 @@
              (g element)))))
 
 (defn cycles
-  "determines the cycle of a permutation"
+  "determines the cycles of a permutation"
   [g]
   (loop [cs []
          visit (keys g)]
