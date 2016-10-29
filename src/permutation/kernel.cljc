@@ -1,4 +1,4 @@
-(ns permutation.core
+(ns permutation.kernel
   (:use [clojure.set :only [difference]]))
 
 (defn- create-permutation

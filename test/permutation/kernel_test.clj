@@ -1,6 +1,6 @@
-(ns permutation.core-test
+(ns permutation.kernel-test
   (:require [clojure.test :refer :all]
-            [permutation.core :refer :all]))
+            [permutation.kernel :refer :all]))
 
 (deftest multiply-test
   (testing "should multiply transpositions"
