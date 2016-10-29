@@ -4,23 +4,23 @@
 (defn- create-permutation
   "create a permutation by forming tuples over a G-set"
   [tuple gset]
-  (let [combine (fn [acc t] (assoc acc (t 0) (t 1)))]
+  (let [combine #(assoc %1 (%2 0) (%2 1))]
     (reduce combine {} (map tuple gset))))
 
 (defn multiply
   "multiply two permutations to produce a third"
   [g h]
-  (create-permutation (fn [x] [x (g (h x))]) (keys g)))
+  (create-permutation #(into [] [% (g (h %))]) (keys g)))
 
 (defn inverse
   "determine the inverse of a permutation"
   [g]
-  (create-permutation (fn [x] [(g x) x]) (keys g)))
+  (create-permutation #(into [] [(g %) %]) (keys g)))
 
 (defn identity-for
   "return the identity permutation on the same G-set"
   [g]
-  (create-permutation (fn [x] [x x]) (keys g)))
+  (create-permutation #(into [] [% %]) (keys g)))
 
 (defn- cycle-of
   "determines the cycle of an element in a given permutation"
@@ -51,11 +51,11 @@
   ;; TODO idiomatic way of joining strings
   [g]
   (let [cs (cycles g)
-        ds (filter (fn [x] (> (.size x) 1)) cs)]
+        ds (filter #(> (.size %) 1) cs)]
     (if (= (.size ds) 0)
       "Id"
       (let [es (map seq ds)
             fs (map str es)
             b (StringBuilder.)
-            bc (reduce (fn [acc v] (doto acc (.append v))) b fs)]
+            bc (reduce #(doto %1 (.append %2)) b fs)]
         (str bc)))))
