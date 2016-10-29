@@ -3,4 +3,5 @@
   :url "https://github.com/fifth-postulate/solving-permutation-puzzles.clojure.git"
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [[org.clojure/clojure "1.7.0"]])
+  :dependencies [[org.clojure/clojure "1.7.0"]]
+  :main ^:skip-aot permutation.core)
