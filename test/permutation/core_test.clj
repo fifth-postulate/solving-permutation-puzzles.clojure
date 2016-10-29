@@ -27,3 +27,11 @@
     (is (= (cycles {0 1, 1 2, 2 0}) [[0 1 2]]))
     (is (= (cycles {0 1, 1 0, 2 3, 3 2}) [[0 1] [2 3]]))))
 
+(deftest cycle-notation-test
+  (testing "should determine the cycle notation of a permutation"
+    (is (= (cycle-notation {0 0, 1 1, 2 2}) "Id"))
+    (is (= (cycle-notation {0 1, 1 0, 2 2}) "(0 1)"))
+    (is (= (cycle-notation {0 0, 1 2, 2 1}) "(1 2)"))
+    (is (= (cycle-notation {0 1, 1 2, 2 0}) "(0 1 2)"))
+    (is (= (cycle-notation {0 1, 1 2, 2 0, 3 3}) "(0 1 2)"))
+    (is (= (cycle-notation {0 1, 1 0, 2 3, 3 2}) "(0 1)(2 3)"))))

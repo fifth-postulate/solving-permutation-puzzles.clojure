@@ -44,3 +44,18 @@
             visited (reduce into #{} current)
             rest (into [] (difference (set visit) visited))]
         (recur current rest)))))
+
+(defn cycle-notation
+  "determines the cycle notation of a permutation"
+  ;; TODO idiomatic way of determining size of list
+  ;; TODO idiomatic way of joining strings
+  [g]
+  (let [cs (cycles g)
+        ds (filter (fn [x] (> (.size x) 1)) cs)]
+    (if (= (.size ds) 0)
+      "Id"
+      (let [es (map seq ds)
+            fs (map str es)
+            b (StringBuilder.)
+            bc (reduce (fn [acc v] (doto acc (.append v))) b fs)]
+        (str bc)))))
