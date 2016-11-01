@@ -20,3 +20,8 @@
                        [{0 0, 1 1, 2 2, 3 3} {0 1, 1 0, 2 2, 3 3}
                         {0 0, 1 1, 2 3, 3 2} {0 1, 1 0, 2 3, 3 2}]))))
 
+(deftest solvable?-test
+  (testing "if we can predict if a permutation is solvable"
+    (is (solvable? {0 1, 1 0} {0 1, 1 0}))
+    (is (solvable? {0 1, 1 2, 2 0} {0 1, 1 0, 2 2} {0 0, 1 2, 2 1}))
+    (is (not (solvable? {0 1, 1 2, 2 0} {0 1, 1 0, 2 2})))))
