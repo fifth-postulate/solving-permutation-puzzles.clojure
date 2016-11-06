@@ -47,12 +47,11 @@
 
 (defn cycle-notation
   "determines the cycle notation of a permutation"
-  ;; TODO idiomatic way of determining size of list
   ;; TODO idiomatic way of joining strings
   [g]
   (let [cs (cycles g)
-        ds (filter #(> (.size %) 1) cs)]
-    (if (= (.size ds) 0)
+        ds (filter #(> (count %) 1) cs)]
+    (if (= (count ds) 0)
       "Id"
       (let [es (map seq ds)
             fs (map str es)
