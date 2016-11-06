@@ -59,3 +59,8 @@
             b (StringBuilder.)
             bc (reduce #(doto %1 (.append %2)) b fs)]
         (str bc)))))
+
+(defn identity?
+  "determines if a permutation is the identity"
+  [g]
+  (every? #(= (g %) %) (keys g)))

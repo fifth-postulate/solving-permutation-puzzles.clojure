@@ -35,3 +35,10 @@
     (is (= (cycle-notation {0 1, 1 2, 2 0}) "(0 1 2)"))
     (is (= (cycle-notation {0 1, 1 2, 2 0, 3 3}) "(0 1 2)"))
     (is (= (cycle-notation {0 1, 1 0, 2 3, 3 2}) "(0 1)(2 3)"))))
+
+(deftest identity?-test
+  (testing "should determine if a permutation is the identity"
+    (is (identity? {0 0}))
+    (is (identity? {0 0, 1 1}))
+    (is (identity? {0 0, 1 1, 2 2})
+    (is (not (identity? {0 1, 1 0}))))))
