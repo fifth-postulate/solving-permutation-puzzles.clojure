@@ -47,17 +47,12 @@
 
 (defn cycle-notation
   "determines the cycle notation of a permutation"
-  ;; TODO idiomatic way of joining strings
   [g]
-  (let [cs (cycles g)
-        ds (filter #(> (count %) 1) cs)]
-    (if (= (count ds) 0)
+  (let [cycles (cycles g)
+        big-cycles (filter #(> (count %) 1) cycles)]
+    (if (= (count big-cycles) 0)
       "Id"
-      (let [es (map seq ds)
-            fs (map str es)
-            b (StringBuilder.)
-            bc (reduce #(doto %1 (.append %2)) b fs)]
-        (str bc)))))
+      (apply str (map seq big-cycles)))))
 
 (defn identity?
   "determines if a permutation is the identity"
