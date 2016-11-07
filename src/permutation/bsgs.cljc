@@ -14,17 +14,17 @@
   "Sifts the element through the base strong generator set"
   [bsgs g]
   (loop [current g
-         index 0]
-    (if (< index (count bsgs))
-      (let [level (nth bsgs index)
+         level-index 0]
+    (if (< level-index (count bsgs))
+      (let [level (nth bsgs level-index)
             base (level :base)
             image (current base)
             orbit (level :orbit)
-            finder (fn [i g] (if (= current g) i nil))
+            finder (fn [i point] (if (= image point) i nil))
             indices (keep-indexed finder orbit)]
         (if-let [index (first indices)]
           (let [transversal (level :transversal)
                 t (nth transversal index)]
-            (recur (multiply (inverse t) current) (+ index 1)))
+            (recur (multiply (inverse t) current) (+ level-index 1)))
           current))
       current)))
