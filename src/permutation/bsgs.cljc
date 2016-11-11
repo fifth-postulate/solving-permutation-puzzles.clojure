@@ -33,3 +33,8 @@
             (recur (multiply (inverse t) current) (+ level-index 1)))
           current))
       current)))
+
+(defn solvable?
+  "determines if the element is solvable in the group defined by the BSGS"
+  [bsgs g]
+  (identity? (sift bsgs g)))
