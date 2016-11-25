@@ -30,7 +30,7 @@
         (if-let [index (first indices)]
           (let [transversal (level :transversal)
                 t (nth transversal index)]
-            (recur (multiply (inverse t) current) (+ level-index 1)))
+            (recur (multiply (inverse t) current) (inc level-index)))
           current))
       current)))
 
