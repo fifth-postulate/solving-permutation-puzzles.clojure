@@ -1,20 +1,6 @@
 (ns permutation.bsgs
   (:use [permutation.kernel :only [multiply inverse identity-for identity?]]))
 
-(def s3 [{:base 0,
-          :generators [{0 1, 1 2, 2 0} {0 1, 1 0, 2 2}],
-          :orbit [0 1 2],
-          :transversal [{0 0, 1 1, 2 2} {0 1, 1 0, 2 2} {0 2, 1 0, 2 1}]}
-         {:base 1,
-          :generators [{0 0, 1 2, 2 1}]
-          :orbit [1 2]
-          :transversal [{0 0, 1 1, 2 2} {0 0, 1 2, 2 1}]}])
-
-(def c3 [{:base 0,
-          :generators [{0 1, 1 2, 2 0}],
-          :orbit [0 1 2],
-          :transversal [{0 0, 1 1, 2 2} {0 1, 1 2, 2 0} {0 2, 1 0, 2 1}]}])
-
 (defn- moved-by
   "returns a point moved by at least one of the generators"
   [generators]
