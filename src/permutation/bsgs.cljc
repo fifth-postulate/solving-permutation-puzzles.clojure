@@ -24,7 +24,7 @@
         moved (filter moved? points)]
     (first moved)))
 
-(defn add-candidates
+(defn- add-candidates
   "adds candidate pairs of points and elements to respective collections"
   [candidates orbit transversal next-generators]
   (loop [candidates candidates
