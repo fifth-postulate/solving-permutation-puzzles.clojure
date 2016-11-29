@@ -26,16 +26,17 @@
 
 (defn add-candidates
   "adds candidate pairs of points and elements to respective collections"
-  [candidates orbit transversal]
+  [candidates orbit transversal next-generators]
   (loop [candidates candidates
          orbit orbit
-         transversal transversal]
+         transversal transversal
+         next-generators next-generators]
     (if (empty? candidates)
-      [orbit transversal]
+      [orbit transversal next-generators]
       (let [[point element] (first candidates)]
         (if (some #{point} orbit)
-          (recur (rest candidates) orbit transversal)
-          (recur (rest candidates) (conj orbit point) (conj transversal element)))))))
+          (recur (rest candidates) orbit transversal next-generators)
+          (recur (rest candidates) (conj orbit point) (conj transversal element) next-generators))))))
 
 (defn level
   "Determines a level of a base strong generator set, given generators"
@@ -43,17 +44,18 @@
   (let [base (moved-by generators)]
     (loop [index 0
            orbit [base]
-           transversal [(identity-for (first generators))]]
+           transversal [(identity-for (first generators))]
+           next-generators []]
       (if (>= index (count orbit))
-        {:base base
+        [{:base base
           :generators generators
           :orbit orbit
-          :transversal transversal}
+          :transversal transversal}, next-generators]
         (let [point (nth orbit index)
               current (nth transversal index)
               candidates (map #(cons (% point) [(multiply % current)]) generators)
-              [next-orbit next-transversal] (add-candidates candidates orbit transversal)]
-          (recur (inc index) next-orbit next-transversal))))))
+              [next-orbit next-transversal next-generators] (add-candidates candidates orbit transversal next-generators)]
+          (recur (inc index) next-orbit next-transversal next-generators))))))
 
 (defn sift
   "Sifts the element through the base strong generator set"
