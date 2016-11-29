@@ -2,6 +2,11 @@
   (:require [permutation.bsgs :refer :all]
             [clojure.test :refer :all]))
 
+(deftest level-test
+  (testing "creation of level"
+    (is (= (level [{0 1, 1 0}]) {:base 0, :generators [{0 1, 1 0}], :orbit [0 1], :transversal [{0 0, 1 1} {0 1, 1 0}]}))
+    (is (= (level [{0 1, 1 0, 2 2}, {0 0, 1 2, 2 1}]) {:base 0, :generators [{0 1, 1 0, 2 2} {0 0, 1 2, 2 1}], :orbit [0 1 2], :transversal [{0 0, 1 1, 2 2} {0 1, 1 0, 2 2} {0 2, 1 0, 2 1}]}))))
+
 (deftest sift-test
   (testing "should sift elements"
     (is (= (sift s3 {0 0, 1 1, 2 2}) {0 0, 1 1, 2 2}))
