@@ -35,7 +35,10 @@
       [orbit transversal next-generators]
       (let [[point element] (first candidates)]
         (if (some #{point} orbit)
-          (recur (rest candidates) orbit transversal next-generators)
+          (let [index (first (keep-indexed #(if (= %2 point) %1 nil) orbit))
+                t (nth transversal index)
+                generator (multiply (inverse t) element)]
+            (recur (rest candidates) orbit transversal (conj next-generators generator)))
           (recur (rest candidates) (conj orbit point) (conj transversal element) next-generators))))))
 
 (defn level
@@ -55,7 +58,7 @@
               current (nth transversal index)
               candidates (map #(cons (% point) [(multiply % current)]) generators)
               [next-orbit next-transversal next-generators] (add-candidates candidates orbit transversal next-generators)]
-          (recur (inc index) next-orbit next-transversal next-generators))))))
+          (recur (inc index) next-orbit next-transversal (filter #(not (identity? %)) next-generators)))))))
 
 (defn sift
   "Sifts the element through the base strong generator set"
