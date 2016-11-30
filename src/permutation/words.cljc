@@ -25,12 +25,12 @@
 (defn multiply
   "multiply two words to produce a third"
   [v w]
-  (normalize (into [] (concat v w))))
+  (normalize (vec (concat v w))))
 
 (defn inverse
   "determines the inverse word for a given word"
   [w]
-  (let [negate #(into [] [(first %) (- (second %))])]
+  (let [negate #(vec [(first %) (- (second %))])]
     (reverse (map negate w))))
 
 (defn identity-for

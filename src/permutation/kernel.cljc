@@ -10,17 +10,17 @@
 (defn multiply
   "multiply two permutations to produce a third"
   [g h]
-  (create-permutation #(into [] [% (g (h %))]) (keys g)))
+  (create-permutation #(vec [% (g (h %))]) (keys g)))
 
 (defn inverse
   "determine the inverse of a permutation"
   [g]
-  (create-permutation #(into [] [(g %) %]) (keys g)))
+  (create-permutation #(vec [(g %) %]) (keys g)))
 
 (defn identity-for
   "return the identity permutation on the same G-set"
   [g]
-  (create-permutation #(into [] [% %]) (keys g)))
+  (create-permutation #(vec [% %]) (keys g)))
 
 (defn- cycle-of
   "determines the cycle of an element in a given permutation"
@@ -42,7 +42,7 @@
       (let [element (apply min visit)
             current (conj cs (cycle-of g element))
             visited (reduce into #{} current)
-            rest (into [] (difference (set visit) visited))]
+            rest (vec (difference (set visit) visited))]
         (recur current rest)))))
 
 (defn cycle-notation
