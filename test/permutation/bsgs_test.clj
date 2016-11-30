@@ -48,3 +48,8 @@
     (is (not (solvable? c3 {0 1, 1 0, 2 2})))
     (is (not (solvable? c3 {0 2, 1 1, 2 0})))
     (is (not (solvable? c3 {0 0, 1 2, 2 1})))))
+
+
+(deftest bsgs-for-test
+  (testing "should determine a base strong generator set for generators"
+    (is (= (count (bsgs-for [{0 1, 1 2, 2 0} {0 1, 1 0, 2 2}])) 2))))

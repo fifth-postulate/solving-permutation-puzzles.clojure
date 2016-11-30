@@ -46,6 +46,16 @@
               [next-orbit next-transversal next-generators] (add-candidates candidates orbit transversal next-generators)]
           (recur (inc index) next-orbit next-transversal (filter #(not (identity? %)) next-generators)))))))
 
+(defn bsgs-for
+  "Determines a base strong generator set for the given generators"
+  [generators]
+  (loop [bsgs []
+         generators generators]
+    (if (empty? generators)
+      bsgs
+      (let [[l gs] (level generators)]
+        (recur (conj bsgs l) gs)))))
+
 (defn sift
   "Sifts the element through the base strong generator set"
   [bsgs g]
